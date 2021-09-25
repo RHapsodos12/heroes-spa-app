@@ -64,6 +64,33 @@ export class HeroesService {
         return this.heroes;
     }
 
+    // tslint:disable-next-line:typedef
+    getHeroe( idx: string) {
+      return this.heroes[idx];
+    }
+
+    // tslint:disable-next-line:typedef
+    buscarHeroes(termino: string) {
+
+      // tslint:disable-next-line:prefer-const
+      let heroesArr: Heroe[] = [];
+      termino = termino.toLowerCase();
+
+      // tslint:disable-next-line:prefer-const
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.heroes.length; i++) {
+        const heroe = this.heroes[i];
+        // tslint:disable-next-line:prefer-const
+        let nombre = heroe.nombre.toLowerCase();
+
+        if (nombre.indexOf(termino) >= 0) {
+          heroe.idx = i;
+          heroesArr.push(heroe);
+        }
+      }
+
+      return heroesArr;
+    }
 }
 
 export interface Heroe {
@@ -72,4 +99,5 @@ export interface Heroe {
     img: string;
     aparicion: string;
     casa: string;
+    idx?: number;
 }
